@@ -1,29 +1,31 @@
 package com.BankApplication.model;
 
 public class User {
-    private int id;
+    private String id;
     private String name;
     private String address;
 
-    public User(int id, String name, String address, int phoneNumber) {
+    private String phoneNumber;
+
+
+    public User(String id, String name, String address, String phoneNumber) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
-    private int phoneNumber;
 
     public User() {
 
     }
 
-    public int getId() {
+    public String getId() {
 
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
 
         this.id = id;
     }
@@ -48,12 +50,12 @@ public class User {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
 
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
 
         this.phoneNumber = phoneNumber;
     }
