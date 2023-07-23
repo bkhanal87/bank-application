@@ -1,5 +1,6 @@
 package com.BankApplication.controller;
 
+import com.BankApplication.exception.UserNotfoundException;
 import com.BankApplication.model.User;
 
 import org.springframework.http.HttpStatus;
@@ -37,8 +38,12 @@ public class BankAppServiceController {
     }
 
     // PUT API
+    // Exception handling added to put method
+    // whenever client tries to update an id that doesn't exist
+    // in the database, gets a message "user not found"
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateUser(@PathVariable("id") String id, @RequestBody User user) {
+        if(!bankUser.containsKey(id)) throw new UserNotfoundException();
         bankUser.remove(id);
         user.setId(id);
         bankUser.put(id, user);
