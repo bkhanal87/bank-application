@@ -1,6 +1,5 @@
 package com.BankApplication.exception;
 
-
 // define a class that extends the Runtime exception class
 // the serialVersionUID attribute is an identifier that is used to
 // serialize/deserialize an object of a Serializable class.
