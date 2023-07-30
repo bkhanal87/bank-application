@@ -1,17 +1,15 @@
 package com.BankApplication.controller;
 
-import com.BankApplication.exception.UserNotfoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.*;
 
 import com.BankApplication.model.User;
 import com.BankApplication.service.BankService;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 // @RestController is used to define the RESTful web services
 @RestController
@@ -19,6 +17,7 @@ public class BankAppServiceController {
     // here, we need to inject the service class using @Autowired method
     @Autowired
     BankService bankService;
+
     // GET API
     // @RequestMapping used to define the Request URI to access the REST Endpoints
     @RequestMapping(value = "/users")
