@@ -2,14 +2,20 @@ package com.BankApplication.service;
 
 import com.BankApplication.model.User;
 import java.util.Collection;
+import java.util.List;
 
 // create an interface that add, edit, get, and delete users
 public interface BankService {
-    public abstract void createUser(User user);
-    public abstract void updateUser(String id, User user);
+    public User createUser(User user);
 
-    public abstract void deleteUser(String id);
-    public abstract Collection<User> getUsers();
+    public List<User> getUserList();
+
+    public User fetchUserById(Long id);
+
+    public void deleteUserById(Long id);
+
+    public User updateUser(Long id, User user);
+
 }
 
 

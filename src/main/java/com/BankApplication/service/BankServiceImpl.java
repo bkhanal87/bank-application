@@ -1,55 +1,63 @@
 package com.BankApplication.service;
 
+import com.BankApplication.db.UserRepository;
 import com.BankApplication.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 // a service class needs to have @Service annotation
 // this class is implementing the BankService interface
 // write logic to create, update, delete, and get users here
 @Service
-public class BankServiceImpl implements BankService{
-    private static Map<String, User> bankUser = new HashMap<>();
-    static {
-        User user1 = new User();
-        user1.setId("1");
-        user1.setName("John");
-        user1.setAddress("123 Main Street, Syracuse, NY 12345");
-        user1.setPhoneNumber("123-456-789");
-        bankUser.put(user1.getId(), user1);
+public class BankServiceImpl implements BankService {
+    // inject UserRepository here
+    @Autowired
+    private UserRepository userRepository;
 
-        User user2 = new User();
-        user2.setId("2");
-        user2.setName("Michael");
-        user2.setAddress("456 Any Court, Anytown, Oh 45232");
-        user2.setPhoneNumber("100-012-5342");
-        bankUser.put(user2.getId(), user2);
-    }
     // logic to create user
     // the override method isn't required but helps to prevent errors, if any
     @Override
-    public void createUser(User user) {
-        bankUser.put(user.getId(), user);
-    }
-    // update user
-    @Override
-    public void updateUser(String id, User user) {
-        bankUser.remove(id);
-        user.setId(id);
-        bankUser.put(id, user);
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
-    // delete user
+    // fetch all users
     @Override
-    public void deleteUser(String id) {
-        bankUser.remove(id);
-    }
-    // get user
-    @Override
-    public Collection<User> getUsers() {
-        return bankUser.values();
+   public List<User> getUserList() {
+        return userRepository.findAll();
+   }
+
+   // fetch user by id
+   public User fetchUserById(Long id) {
+        return userRepository.findById(id).get();
+   }
+
+   // delete user by id
+   public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+   };
+
+    // update user by id
+    public User updateUser(Long id, User user) {
+        User userDB = userRepository.findById(id).get();
+
+        if(Objects.nonNull (user.getName()) &&
+                !"".equalsIgnoreCase(user.getName())) {
+            userDB.setName(user.getName());
+        }
+
+        if(Objects.nonNull (user.getAddress()) &&
+                !"".equalsIgnoreCase(user.getAddress())) {
+            userDB.setAddress(user.getAddress());
+        }
+
+        if(Objects.nonNull (user.getPhoneNumber()) &&
+                !"".equalsIgnoreCase(user.getPhoneNumber())) {
+            userDB.setPhoneNumber(user.getPhoneNumber());
+        }
+
+        return userRepository.save(userDB);
     }
 }

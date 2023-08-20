@@ -10,43 +10,46 @@ import com.BankApplication.service.BankService;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
+import java.util.List;
 
 // @RestController is used to define the RESTful web services
 @RestController
 public class BankAppServiceController {
     // here, we need to inject the service class using @Autowired method
     @Autowired
-    BankService bankService;
+    private BankService bankService;
 
-    // GET API
-    // @RequestMapping used to define the Request URI to access the REST Endpoints
-    @RequestMapping(value = "/users")
-    public ResponseEntity<Object> getUser() {
-        return new ResponseEntity<>(bankService.getUsers(), HttpStatus.OK);
+    // GET API to fetch a list of users
+    @GetMapping("/users")
+    public List<User> getUserList() {
+
+        return bankService.getUserList();
+    }
+
+    // GET API to fetch user by id
+    @GetMapping("/users/{id}")
+    public User fetchUserById(@PathVariable("id") Long id) {
+
+        return bankService.fetchUserById(id);
     }
 
     // PUT API
-    // Exception handling added to put method
-    // whenever client tries to update an id that doesn't exist
-    // in the database, gets a message "user not found"
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateUser(@PathVariable("id") String id, @RequestBody User user) {
-        bankService.updateUser(id, user);
-        return new ResponseEntity<>("User is updated successfully", HttpStatus.OK);
+    @PutMapping ("/users/{id}")
+    public User updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+        return bankService.updateUser(id, user);
     }
 
-    //DELETE API
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteUser(@PathVariable("id") String id) {
-        bankService.deleteUser(id);
-        return new ResponseEntity<>("Product is removed successfully", HttpStatus.OK);
+    // Delete API
+    @DeleteMapping("/users/{id}")
+    public String deleteUserById(@PathVariable("id") Long id) {
+        bankService.deleteUserById(id);
+        return "Department successfully deleted!";
     }
 
     // POST API
-    @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
-        bankService.createUser(user);
-        return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
+    @PostMapping("/users")
+    public User createUser(@RequestBody User user) {
+          return bankService.createUser(user);
     }
 }
 
