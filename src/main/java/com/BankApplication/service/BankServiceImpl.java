@@ -30,17 +30,17 @@ public class BankServiceImpl implements BankService {
    }
 
    // fetch user by id
-   public User fetchUserById(Long id) {
+   public User fetchUserById(int id) {
         return userRepository.findById(id).get();
    }
 
    // delete user by id
-   public void deleteUserById(Long id) {
+   public void deleteUserById(int id) {
         userRepository.deleteById(id);
    };
 
     // update user by id
-    public User updateUser(Long id, User user) {
+    public User updateUser(int id, User user) {
         User userDB = userRepository.findById(id).get();
 
         if(Objects.nonNull (user.getName()) &&

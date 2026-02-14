@@ -10,11 +10,11 @@ public interface BankService {
 
     public List<User> getUserList();
 
-    public User fetchUserById(Long id);
+    public User fetchUserById(int id);
 
-    public void deleteUserById(Long id);
+    public void deleteUserById(int id);
 
-    public User updateUser(Long id, User user);
+    public User updateUser(int id, User user);
 
 }
 

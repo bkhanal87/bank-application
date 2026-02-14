@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 // extending JpaRepository and passing entity and primary key type
-public interface UserRepository extends JpaRepository<User, Long> {
-
+public interface UserRepository extends JpaRepository<User, Integer> {
 }
