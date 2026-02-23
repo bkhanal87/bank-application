@@ -1,0 +1,29 @@
+services:
+  bank-mysql:
+    image: mysql:latest
+    container_name: bank-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: bankapplication
+    ports:
+      - "3309:3306"
+    volumes:
+      - bankdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+
+  bank-app:
+    build: .
+    container_name: bank-app
+    depends_on:
+      bank-mysql:
+        condition: service_healthy
+    ports:
+      - "8085:8080"
+
+volumes:
+  bankdata:
