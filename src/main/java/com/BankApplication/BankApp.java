@@ -11,9 +11,6 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class BankApp {
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(BankApp.class, args);
-
-        UserRepository userRepository = context.getBean(UserRepository.class);
-        // SpringApplication.run(BankApp.class, args);
+       SpringApplication.run(BankApp.class, args);
     }
 }

@@ -1,6 +1,7 @@
 package com.BankApplication.service;
 
 import com.BankApplication.model.User;
+import com.BankApplication.model.Account;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public interface BankService {
 
     public User updateUser(int id, User user);
 
+    List<Account> getAccountList();
 }
 
 

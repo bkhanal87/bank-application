@@ -20,15 +20,22 @@ public class BankAppServiceController {
     @Autowired
     private BankService bankService;
 
+    @GetMapping("/")
+    public String home() {
+        return "Welcome to my Banking app";
+    }
+
     // GET API to fetch a list of users
     @GetMapping("/users")
     public List<User> getUserList() {
+
         return bankService.getUserList();
     }
 
     // GET API to fetch user by id
     @GetMapping("/users/{id}")
     public User fetchUserById(@PathVariable("id") int id) {
+
         return bankService.fetchUserById(id);
     }
 
@@ -48,6 +55,7 @@ public class BankAppServiceController {
     // POST API
     @PostMapping("/users")
     public User createUser(@RequestBody User user) {
+
         return bankService.createUser(user);
     }
 }
