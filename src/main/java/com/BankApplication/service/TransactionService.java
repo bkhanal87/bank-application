@@ -1,23 +1,18 @@
 package com.BankApplication.service;
 
-import com.BankApplication.model.User;
-import com.BankApplication.model.Account;
-import java.util.Collection;
+import com.BankApplication.model.Transaction;
+
 import java.util.List;
 
-// create an interface that add, edit, get, and delete users
 public interface TransactionService {
-    public User createUser(User user);
 
-    public List<User> getUserList();
+    List<Transaction> getAllTransactions();
 
-    public User fetchUserById(int id);
+    List<Transaction> getTransactionsByAccountId(Integer accountId);
 
-    public void deleteUserById(int id);
+    Transaction getTransactionById(Integer id);
 
-    public User updateUser(int id, User user);
-
-    List<Account> getAccountList();
+    Transaction createTransaction(Transaction transaction);
 }
 
 
