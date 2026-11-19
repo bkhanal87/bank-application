@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/transfers")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://bank-app-frontend-o5gt.onrender.com")
 public class TransferController {
 
     @Autowired
